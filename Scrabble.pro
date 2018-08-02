@@ -19,8 +19,7 @@ SOURCES += \
     Tiles/tilebag.cpp \
     Tiles/tileinfo.cpp \
     Gameboard/gameborad.cpp \
-    Math/matrix.cpp \
-    Math/point.cpp
+    Math/matrix.cpp
 
 RESOURCES += qml.qrc
 
@@ -41,5 +40,4 @@ HEADERS += \
     Tiles/tilebag.h \
     Tiles/tileinfo.h \
     Gameboard/gameborad.h \
-    Math/matrix.h \
-    Math/point.h
+    Math/matrix.h

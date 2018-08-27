@@ -6,8 +6,10 @@
 class Field
 {
 public:
-    Field(const bool isCenter = false);
-    Field(const quint8 wordBonus, const quint8 letterBonus);
+    enum Feature { None, Word, Letter, Center };
+
+    Field();
+    Field(const Feature feature, const quint8 bonus = 0);
     Field(const Field& field);
 
     QString toString() const;
@@ -15,9 +17,8 @@ public:
     Field& operator = (const Field& rhs);
 
 private:
-    quint8 m_wordBonus;
-    quint8 m_letterBonus;
-    bool m_isCenter;
+    Feature m_feature;
+    quint8 m_bonus;
 };
 
 #endif // FIELD_H

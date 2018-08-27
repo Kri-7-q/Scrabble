@@ -1,28 +1,25 @@
 #include "field.h"
 
 // Standard constructor
-Field::Field(const bool isCenter) :
-    m_wordBonus(0),
-    m_letterBonus(0),
-    m_isCenter(isCenter)
+Field::Field() :
+    m_feature(None),
+    m_bonus(0)
 {
 
 }
 
 // Constructor with initialization.
-Field::Field(const quint8 wordBonus, const quint8 letterBonus) :
-    m_wordBonus(wordBonus),
-    m_letterBonus(letterBonus),
-    m_isCenter(false)
+Field::Field(const Feature feature, const quint8 bonus) :
+    m_feature(feature),
+    m_bonus(bonus)
 {
 
 }
 
 // Copy constructor
 Field::Field(const Field &field) :
-    m_wordBonus(field.m_wordBonus),
-    m_letterBonus(field.m_letterBonus),
-    m_isCenter(false)
+    m_feature(field.m_feature),
+    m_bonus(field.m_bonus)
 {
 
 }
@@ -30,24 +27,29 @@ Field::Field(const Field &field) :
 // Get the field as a string.
 QString Field::toString() const
 {
-    if (m_wordBonus > 0) {
-        return QString("W").append(QString::number(m_wordBonus));
-    }
-    if (m_letterBonus > 0) {
-        return QString("L").append(QString::number(m_letterBonus));
-    }
-    if (m_isCenter) {
-        return QString("()");
+    QString val("..");
+    switch (m_feature) {
+    case Word:
+        val = QString("W").append(QString::number(m_bonus));
+        break;
+    case Letter:
+        val = QString("L").append(QString::number(m_bonus));
+        break;
+    case Center:
+        val = QString("()");
+        break;
+    default:
+        break;
     }
 
-    return QString("..");
+    return val;
 }
 
 // Operator overload.
 Field &Field::operator = (const Field &rhs)
 {
-    m_wordBonus = rhs.m_wordBonus;
-    m_letterBonus = rhs.m_letterBonus;
+    m_feature = rhs.m_feature;
+    m_bonus = rhs.m_bonus;
 
     return *this;
 }

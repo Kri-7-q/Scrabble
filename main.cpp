@@ -1,8 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QTextStream>
-#include "Math/matrix.cpp"
-#include "Gameboard/field.h"
+#include "Math/fieldmatrix.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,55 +17,55 @@ int main(int argc, char *argv[])
     */
     QTextStream out(stdout);
 
-    Matrix<Field> matrix(15, 15);
+    FieldMatrix matrix(15, 15);
     // Row 1
-    matrix.setField(Field(3, 0), 0, 0);
+    matrix.setField(Field(Field::Word, 3), 0, 0);
     // Row 2
-    matrix.setField(Field(0, 0), 0, 1);
-    matrix.setField(Field(2, 0), 1, 1);
+    matrix.setField(Field(Field::None), 0, 1);
+    matrix.setField(Field(Field::Word, 2), 1, 1);
     // Row 3
-    matrix.setField(Field(0, 0), 0, 2);
-    matrix.setField(Field(0, 0), 1, 2);
-    matrix.setField(Field(2, 0), 2, 2);
+    matrix.setField(Field(Field::None), 0, 2);
+    matrix.setField(Field(Field::None), 1, 2);
+    matrix.setField(Field(Field::Word, 2), 2, 2);
     // Row 4
-    matrix.setField(Field(0, 2), 0, 3);
-    matrix.setField(Field(0, 0), 1, 3);
-    matrix.setField(Field(0, 0), 2, 3);
-    matrix.setField(Field(2, 0), 3, 3);
+    matrix.setField(Field(Field::Letter, 2), 0, 3);
+    matrix.setField(Field(Field::None), 1, 3);
+    matrix.setField(Field(Field::None), 2, 3);
+    matrix.setField(Field(Field::Word, 2), 3, 3);
     // Row 5
-    matrix.setField(Field(0, 0), 0, 4);
-    matrix.setField(Field(0, 0), 1, 4);
-    matrix.setField(Field(0, 0), 2, 4);
-    matrix.setField(Field(0, 0), 3, 4);
-    matrix.setField(Field(2, 0), 4, 4);
+    matrix.setField(Field(Field::None), 0, 4);
+    matrix.setField(Field(Field::None), 1, 4);
+    matrix.setField(Field(Field::None), 2, 4);
+    matrix.setField(Field(Field::None), 3, 4);
+    matrix.setField(Field(Field::None), 4, 4);
     // Row 6
-    matrix.setField(Field(0, 0), 0, 5);
-    matrix.setField(Field(0, 3), 1, 5);
-    matrix.setField(Field(0, 0), 2, 5);
-    matrix.setField(Field(0, 0), 3, 5);
-    matrix.setField(Field(0, 0), 4, 5);
-    matrix.setField(Field(0, 3), 5, 5);
+    matrix.setField(Field(Field::None, 0), 0, 5);
+    matrix.setField(Field(Field::Letter, 3), 1, 5);
+    matrix.setField(Field(Field::None, 0), 2, 5);
+    matrix.setField(Field(Field::None, 0), 3, 5);
+    matrix.setField(Field(Field::None, 0), 4, 5);
+    matrix.setField(Field(Field::Letter, 3), 5, 5);
     // Row 7
-    matrix.setField(Field(0, 0), 0, 6);
-    matrix.setField(Field(0, 0), 1, 6);
-    matrix.setField(Field(0, 2), 2, 6);
-    matrix.setField(Field(0, 0), 3, 6);
-    matrix.setField(Field(0, 0), 4, 6);
-    matrix.setField(Field(0, 0), 5, 6);
-    matrix.setField(Field(0, 2), 6, 6);
+    matrix.setField(Field(Field::None, 0), 0, 6);
+    matrix.setField(Field(Field::None, 0), 1, 6);
+    matrix.setField(Field(Field::Letter, 2), 2, 6);
+    matrix.setField(Field(Field::None, 0), 3, 6);
+    matrix.setField(Field(Field::None, 0), 4, 6);
+    matrix.setField(Field(Field::None, 0), 5, 6);
+    matrix.setField(Field(Field::Letter, 2), 6, 6);
     // Row 8
-    matrix.setField(Field(3, 0), 0, 7);
-    matrix.setField(Field(0, 0), 1, 7);
-    matrix.setField(Field(0, 0), 2, 7);
-    matrix.setField(Field(0, 2), 3, 7);
-    matrix.setField(Field(0, 0), 4, 7);
-    matrix.setField(Field(0, 0), 5, 7);
-    matrix.setField(Field(0, 0), 6, 7);
-    matrix.setField(Field(true), 7, 7);
+    matrix.setField(Field(Field::Word, 3), 0, 7);
+    matrix.setField(Field(Field::None, 0), 1, 7);
+    matrix.setField(Field(Field::None, 0), 2, 7);
+    matrix.setField(Field(Field::None, 2), 3, 7);
+    matrix.setField(Field(Field::None, 0), 4, 7);
+    matrix.setField(Field(Field::None, 0), 5, 7);
+    matrix.setField(Field(Field::None, 0), 6, 7);
+    matrix.setField(Field(Field::Center), 7, 7);
 
-    Matrix<Field> topLeft = matrix.section(0, 0, 8, 8);
+    FieldMatrix topLeft = matrix.section(0, 0, 8, 8);
     topLeft.mirrorCopy(Matrix<Field>::LeftBottom);
-    Matrix<Field> top = matrix.section(0, 0, 15, 8);
+    FieldMatrix top = matrix.section(0, 0, 15, 8);
     top.mirrorCopy(Matrix<Field>::VertLeft);
     matrix.mirrorCopy(Matrix<Field>::HorzTop);
 
